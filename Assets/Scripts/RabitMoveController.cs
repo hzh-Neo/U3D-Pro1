@@ -51,11 +51,18 @@ public class RabitMoveController : MonoBehaviour
             anim.SetBool("death", value);
         }
     }
+
+    public float groundDistance = 0.4f;
+
+    public LayerMask groundMask;
+
     private Vector3[] vectorDis = new Vector3[2];
 
     private delegate void TimerCallback();
 
     private STimer timer;
+
+    private bool isGrounded;
 
     private bool moveTimer = false;
 
@@ -75,6 +82,19 @@ public class RabitMoveController : MonoBehaviour
     void Update()
     {
         loopMove();
+
+    }
+
+    private void onListenFloor()
+    {
+        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+        if (isGrounded)
+        {
+            if (transform.position.y < 0)
+            {
+             
+            }
+        }
     }
 
     private void loopMove()
@@ -163,6 +183,7 @@ public class RabitMoveController : MonoBehaviour
         {
             // 按照方向移动一步
             transform.position = currentPosition + direction * step;
+           
         }
         else
         {

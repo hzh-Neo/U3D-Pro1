@@ -6,6 +6,8 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
 
+    public Camera cam;
+
     float xRotation = 0f;
     float YRotation = 0f;
 
@@ -29,8 +31,8 @@ public class NewBehaviourScript : MonoBehaviour
         //control rotation around y axis (Look up and down)
         YRotation += mouseX;
 
-        //applying both rotations
-        transform.localRotation = Quaternion.Euler(xRotation, YRotation, 0f);
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0f);
+        transform.localRotation = Quaternion.Euler(0f, YRotation, 0f);
 
     }
 }

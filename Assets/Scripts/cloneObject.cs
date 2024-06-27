@@ -12,7 +12,9 @@ public class RabitInit : MonoBehaviour
     [Header("方圆多大内生成")]
     public float moveArea = 100;
 
-    public Vector3[] vectorDis = new Vector3[2];
+    public bool isRenderScale;
+
+    private Vector3[] vectorDis = new Vector3[2];
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +36,16 @@ public class RabitInit : MonoBehaviour
         {
             GameObject rabiit = newRabit();
             rabiit.transform.position = GenerateRandomVector3InBox(vectorDis[0], vectorDis[1]);
-            float bigNum = Random.Range(0, 6);
-            rabiit.transform.localScale = new Vector3(bigNum, bigNum, bigNum);
+           
+            if (isRenderScale)
+            {
+                float bigNum = Random.Range(0, 6);
+                rabiit.transform.localScale = new Vector3(bigNum, bigNum, bigNum);
+            }
+            else
+            {
+                rabiit.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 

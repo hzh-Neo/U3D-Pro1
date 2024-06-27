@@ -18,22 +18,47 @@ public class SelectionManager : MonoBehaviour
 
     void Update()
     {
+        RayThings();
+    }
+
+    private void RayThings()
+    {
         Ray ray = camera1.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 20))
         {
-            var selectionTransform = hit.transform;
+            Transform selectionTransform = hit.transform;
             InteractableObject interactObj = selectionTransform.GetComponent<InteractableObject>();
+
             if (interactObj)
             {
-                interaction_Info_UI.text = interactObj.GetItemName();
-                interaction_Info_UI.gameObject.SetActive(true);
+                string name = interactObj.GetItemName();
+                if (!String.IsNullOrEmpty(name))
+                {
+                    interaction_Info_UI.text = name;
+                    interaction_Info_UI.gameObject.SetActive(true);
+                }
+                else
+                {
+                    interaction_Info_UI.gameObject.SetActive(false);
+                }
+                if (interactObj.canPicker)
+                {
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        Destroy(interactObj.gameObject);
+                    }
+                }
             }
             else
             {
                 interaction_Info_UI.gameObject.SetActive(false);
             }
 
+        }
+        else
+        {
+            interaction_Info_UI.gameObject.SetActive(false);
         }
     }
 }

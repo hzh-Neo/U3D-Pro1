@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     public string ItemName;
+    public bool canPicker;
 
     public string GetItemName()
     {
