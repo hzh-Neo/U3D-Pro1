@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
@@ -46,6 +47,7 @@ public class SelectionManager : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Mouse0))
                     {
+                        Bag.Instance.AddBagItem("stone", 1);
                         Destroy(interactObj.gameObject);
                     }
                 }
