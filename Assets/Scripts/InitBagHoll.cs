@@ -15,12 +15,14 @@ public class InitBagHoll : MonoSingleton<InitBagHoll>
     public float splitH = 15;
 
     public GameObject[] bagHolls;
+    private Image img;
 
     public bool isInit;
 
     private void Awake()
     {
         Bag.Instance.LoadFromFile();
+        img = gameObject.GetComponent<Image>();
     }
 
     // Start is called before the first frame update
@@ -28,11 +30,10 @@ public class InitBagHoll : MonoSingleton<InitBagHoll>
     {
         rectTransform = bagItem.GetComponent<RectTransform>();
         initBag();
-        EventSystem.Publish(default(UpdateBag));
         isInit = true;
     }
 
-    private void initBag()
+    public void initBag()
     {
         float leftBagW = bagWidth - padding * 2 - rectTransform.rect.width;
         float leftBagH = bagHeight - padding * 2 - rectTransform.rect.height;
@@ -41,7 +42,7 @@ public class InitBagHoll : MonoSingleton<InitBagHoll>
         float startX = rectTransform.anchoredPosition3D.x;
         float startY = rectTransform.anchoredPosition3D.y;
 
-        bagHolls=new GameObject[bagNum];
+        bagHolls = new GameObject[bagNum];
         for (int i = 0; i < bagNum; i++)
         {
             GameObject cloneItem = newItem();
@@ -59,14 +60,24 @@ public class InitBagHoll : MonoSingleton<InitBagHoll>
             }
             RectTransform clonedImageRectTransform = cloneItem.GetComponent<RectTransform>();
             clonedImageRectTransform.anchoredPosition = new Vector3(startX, startY, 0);
+            showObjectImage(cloneItem);
             bagHolls[i] = cloneItem;
         }
+        showObjectImage(bagItem);
+        img.color = Color.white;
+        gameObject.SetActive(false);
     }
 
     private GameObject newItem()
     {
         GameObject clonedItem = Instantiate(bagItem, bagItem.transform.parent);
         return clonedItem;
+    }
+
+    private void showObjectImage(GameObject gObj)
+    {
+        Image imgC = gObj.GetComponent<Image>();
+        imgC.color = Color.white;
     }
 
 }

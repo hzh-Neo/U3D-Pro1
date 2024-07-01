@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class InputController : MonoSingleton<InputController>
 {
     public GameObject bagOne;
+    public bool isBagOpen;
     // Update is called once per frame
     void Update()
     {
@@ -25,7 +26,7 @@ public class InputController : MonoBehaviour
  
         bool isActive = bagOne.activeSelf;
         bagOne.SetActive(!isActive);
-
+        isBagOpen = !isActive;
         if (!isActive)
         {
             if (InitBagHoll.Instance.isInit)

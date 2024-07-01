@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [Event]
 public class UpdateBagEvent : AEvent<UpdateBag>
 {
+    
+
     protected override void Run(UpdateBag a)
     {
         Start().Forget();

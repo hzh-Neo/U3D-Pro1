@@ -224,6 +224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: "\u6811"
+  ImgName: 
+  ItemShowName: 
   canPicker: 0
 --- !u!4 &107559547 stripped
 Transform:
@@ -804,7 +806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1046,14 +1048,13 @@ GameObject:
   - component: {fileID: 1464753838}
   - component: {fileID: 1464753837}
   - component: {fileID: 1464753839}
-  - component: {fileID: 1464753840}
   m_Layer: 5
   m_Name: Bag
   m_TagString: Bag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1464753836
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1087,10 +1088,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1132,18 +1133,6 @@ MonoBehaviour:
   splitH: 15
   bagHolls: []
   isInit: 0
---- !u!114 &1464753840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464753835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79fd4a20ae2a864bb5bc6fa3fa692d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1509427776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6747749842295207000, guid: deb98a2b70f37a045a40c4d80544be05, type: 3}
@@ -1579,6 +1568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bagOne: {fileID: 1464753835}
+  isBagOpen: 0
 --- !u!1 &1752525198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,6 +1797,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: "\u77F3\u5934"
+  ImgName: stone
+  ItemShowName: "\u77F3\u5934\uFF08F\u53EF\u62FE\u53D6\uFF09"
   canPicker: 1
 --- !u!65 &1843523418
 BoxCollider:

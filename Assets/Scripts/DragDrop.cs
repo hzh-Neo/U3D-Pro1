@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-
-    [SerializeField] private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
@@ -56,6 +54,10 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             transform.position = startPosition;
             transform.SetParent(startParent);
+
+        }
+        else
+        {
 
         }
 

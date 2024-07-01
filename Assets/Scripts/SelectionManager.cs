@@ -45,9 +45,9 @@ public class SelectionManager : MonoBehaviour
                 }
                 if (interactObj.canPicker)
                 {
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    if (Input.GetKeyDown(KeyCode.F))
                     {
-                        Bag.Instance.AddBagItem("stone", 1);
+                        Bag.Instance.AddBagItem(interactObj.ImgName, 1);
                         Destroy(interactObj.gameObject);
                     }
                 }
