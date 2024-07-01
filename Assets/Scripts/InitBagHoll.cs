@@ -46,6 +46,8 @@ public class InitBagHoll : MonoSingleton<InitBagHoll>
         for (int i = 0; i < bagNum; i++)
         {
             GameObject cloneItem = newItem();
+            bagSortID sortID = cloneItem.GetComponent<bagSortID>();
+            sortID.sortID = i + 1;
             leftBagW -= bagItemW;
             if (leftBagW > bagItemW + splitH)
             {

@@ -4,6 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
+[System.Serializable]
 public class BagItem
 {
     public string name;
@@ -15,7 +16,8 @@ public class Bag : MonoSingleton<Bag>
 {
     public string bagSavePath = Path.Combine(Application.dataPath, "save/bag.save");
 
-    public List<BagItem> bagItems=new List<BagItem>();
+    public List<BagItem> bagItems = new List<BagItem>();
+    public HashSet<int> sortIDs = new HashSet<int>();
 
     /// <summary>
     /// 根据名称查找项
@@ -37,16 +39,30 @@ public class Bag : MonoSingleton<Bag>
         BagItem bItem = FindBagItemByName(name);
         if (bItem != null)
         {
-            bItem.num+=num;
+            bItem.num += num;
         }
         else
         {
             BagItem bagItem = new BagItem();
             bagItem.name = name;
             bagItem.num = num;
+            bagItem.sortID = getSortID();
             bagItems.Add(bagItem);
         }
         SaveToFile();
+    }
+
+    private int getSortID(int i = 0)
+    {
+        if (!sortIDs.Contains(i))
+        {
+            return i;
+        }
+        else
+        {
+            i++;
+            return getSortID(i);
+        }
     }
 
     /// <summary>
@@ -73,7 +89,7 @@ public class Bag : MonoSingleton<Bag>
     /// 加载文件
     /// </summary>
     /// <param name="filePath"></param>
-    public void LoadFromFile(string filePath="")
+    public void LoadFromFile(string filePath = "")
     {
         if (String.IsNullOrEmpty(filePath))
         {
@@ -83,6 +99,11 @@ public class Bag : MonoSingleton<Bag>
         {
             string json = File.ReadAllText(filePath);
             bagItems = JsonConvert.DeserializeObject<List<BagItem>>(json);
+            foreach (BagItem item in bagItems)
+            {
+                sortIDs.Add(item.sortID);
+            }
+
         }
         else
         {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [Event]
 public class UpdateBagEvent : AEvent<UpdateBag>
 {
-    
+
 
     protected override void Run(UpdateBag a)
     {
@@ -32,6 +32,9 @@ public class UpdateBagEvent : AEvent<UpdateBag>
                 }
 
                 GameObject item = ObjectCreater.CreateEffect("Objects/item", Vector3.zero, 1, BagHolls[sortID].transform);
+                ItemData itemData = item.GetComponent<ItemData>();
+                itemData.bagItem = bagItem;
+
                 Image image = item.GetComponent<Image>();
                 string spritePath;
                 ItemMatch.list.TryGetValue(bagItem.name, out spritePath);

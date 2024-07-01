@@ -17,7 +17,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void Awake()
     {
-        
+
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
@@ -40,31 +40,63 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         //So the item will move with our mouse (at same speed)  and so it will be consistant if the canvas has a different scale (other then 1);
         rectTransform.anchoredPosition += eventData.delta;
-
     }
 
 
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
         itemBeingDragged = null;
 
-        if (transform.parent == startParent || transform.parent == transform.root)
+        GameObject newBagHoll = GetBagHollUnderMouse();
+        if (newBagHoll != null)
         {
-            transform.position = startPosition;
-            transform.SetParent(startParent);
-
+            newSortID(newBagHoll);
+            rectTransform.anchoredPosition = Vector3.zero;
+            transform.SetParent(newBagHoll.transform, false);
         }
         else
         {
-
+            transform.position = startPosition;
+            transform.SetParent(startParent);
         }
 
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
 
+    private void newSortID(GameObject newBagHoll)
+    {
+        bagSortID bSID = newBagHoll.GetComponent<bagSortID>();
+        ItemData iData = GetComponent<ItemData>();
+        if (iData != null)
+        {
+            iData.bagItem.sortID = bSID.sortID;
+        }
+   
+    }
 
+    private GameObject GetBagHollUnderMouse()
+    {
+        // 从鼠标位置发射射线，找到 bagHoll
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        RaycastResult result = Raycast(pointerEventData);
+
+        if (result.gameObject != null && result.gameObject.CompareTag("BagHoll"))
+        {
+            return result.gameObject;
+        }
+
+        return null;
+    }
+
+    private RaycastResult Raycast(PointerEventData pointerEventData)
+    {
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+        return results.Count > 0 ? results[0] : new RaycastResult();
+    }
 
 }

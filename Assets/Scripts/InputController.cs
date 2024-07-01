@@ -31,7 +31,7 @@ public class InputController : MonoSingleton<InputController>
         {
             if (InitBagHoll.Instance.isInit)
             {
-                EventSystem.Publish(default(UpdateBag));
+                EventSystem2.Publish(default(UpdateBag));
             }
           
             Cursor.lockState = CursorLockMode.None;

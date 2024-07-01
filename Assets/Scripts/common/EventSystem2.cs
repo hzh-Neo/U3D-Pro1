@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public static class EventSystem
+public static class EventSystem2
 {
     private static readonly Dictionary<Type, List<IEvent>> allEvents = new();
 
-    static EventSystem()
+    static EventSystem2()
     {
-        foreach (var type in typeof(EventSystem).Assembly.GetTypes())
+        foreach (var type in typeof(EventSystem2).Assembly.GetTypes())
         {
             var objects = type.GetCustomAttributes(typeof(EventAttribute), true);
             if (objects.Length == 0)

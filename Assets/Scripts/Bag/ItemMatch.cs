@@ -11,6 +11,7 @@ public class ItemMatch
 {
     public static Dictionary<string, string> list = new Dictionary<string, string> {
       { "stone",  "BagImages/stone" },
+        {"egg","BagImages/egg" }
     };
 }
 

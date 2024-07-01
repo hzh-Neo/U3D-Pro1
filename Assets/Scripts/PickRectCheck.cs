@@ -12,6 +12,7 @@ public class PickRectCheck : MonoBehaviour
     {
         iObj = interObj.GetComponent<InteractableObject>();
         defaultName = iObj.ItemName;
+        iObj.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

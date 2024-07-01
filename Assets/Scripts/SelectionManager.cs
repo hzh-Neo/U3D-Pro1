@@ -24,6 +24,12 @@ public class SelectionManager : MonoBehaviour
 
     private void RayThings()
     {
+
+        Vector3 mousePosition = Input.mousePosition;
+        if (mousePosition.x < 0 || mousePosition.y < 0 || mousePosition.x > Screen.width || mousePosition.y > Screen.height)
+        {
+            return;
+        }
         Ray ray = camera1.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
